@@ -3,6 +3,8 @@
 use App\Http\Controllers\Channel\ChannelController;
 use App\Http\Controllers\Payment\PayOrderController;
 use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Video\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,8 +37,27 @@ Route::get('/channels', [ChannelController::class,'index'])->name('channel.index
 Route::get('/posts/create', [PostController::class,'create'])->name('post.create');
 
 
+// Polymorphic Relationship (e.g. ) Start//
+
+//use post to create from blade
+//one-to-one
+Route::get('/create-post', [PostController::class,'create2'])->name('post.create2');
+Route::get('/create-user', [UserController::class,'create2'])->name('user.create');
+
+//one-to-many
+Route::get('/create-comments-onPost', [PostController::class,'create_comment'])->name('post.comment-create');
+    //first create a Video post
+Route::get('/video/create', [VideoController::class,'create'])->name('video.create');
+    //then implement the polymorphic relationship
+Route::get('/create-comments-onVideo', [VideoController::class,'create_comment'])->name('video.comment-create');
+
+//many-to-many
+//Tag might be created before or it can automatically added during the post/video post creation
+Route::get('/creat-tags-onPost', [PostController::class,'create_tags'])->name('post.comment-tags');
+Route::get('/creat-tags-onVideo', [VideoController::class,'create_tags'])->name('video.comment-tags');
 
 
+// Polymorphic Relationship (e.g. ) End//
 
 
 
