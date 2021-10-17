@@ -80,7 +80,11 @@ Route::get('/macros-exmaple', [MacrosExampleController::class,'index'])->name('m
 // Macros End//
 
 
+// Pipeline Start//
 
+Route::get('/posts-filter', [PostController::class,'filter'])->name('post.filter');
+
+// Pipeline End//
 
 
 

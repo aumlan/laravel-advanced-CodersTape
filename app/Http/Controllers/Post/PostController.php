@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use App\Models\Channel;
 use App\Models\Post;
+use App\QueryFilters\Active;
+use App\QueryFilters\Sort;
 use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
 
 class PostController extends Controller
 {
@@ -53,6 +56,29 @@ class PostController extends Controller
             'name'=> 'eloquent'
         ]);
 //        return view('');
+    }
+
+
+    //Pipeline
+
+    /**
+     * "GET" Filter Request
+     * Request should be like this:
+     * http://127.0.0.1:8000/posts-filter?active=0&sort=desc
+     * Every filter is optional in Pipeline. Just request which one is required
+     */
+    public function filter()
+    {
+        $posts = app(Pipeline::class)
+                    ->send(Post::query())
+                    ->through([
+                        Active::class,
+                        Sort::class,
+                    ])
+                    ->thenReturn()   // ->then(fn ($builder) => $builder->get())
+                    ->paginate(5);
+
+        return view('post.index',compact('posts'));
     }
 
 
