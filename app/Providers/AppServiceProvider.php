@@ -5,10 +5,14 @@ namespace App\Providers;
 use App\Billing\BankPaymentGateway;
 use App\Billing\CreditPaymentGateway;
 use App\Billing\PaymentGatewayContract;
+use App\Macros\ResponseMixins;
+use App\Macros\StrMixins;
 use App\Models\Channel;
 use App\Postcard\PostcardSendingService;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -68,6 +72,20 @@ class AppServiceProvider extends ServiceProvider
 
         //more advanced if there are too many view queries to implement
         // https://www.youtube.com/watch?v=7QWZxjgvEQc&ab_channel=Coder%27sTape
+
+
+        // Macros Start
+
+        /**
+         * Register the Custom Macro Classes
+         * Str/ResponseFactory::mixin() will add a custom function List in Str/ResponseFactory
+         * StrMixins or ResponseMixins class contains the list of custom functions to add in that corresponding Str/ResponseFactory class.
+         */
+
+        Str::mixin(new StrMixins());
+        ResponseFactory::mixin(new ResponseMixins());
+
+        // Macros End
 
     }
 }

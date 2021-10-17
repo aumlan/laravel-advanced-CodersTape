@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Channel\ChannelController;
+use App\Http\Controllers\Macros\MacrosExampleController;
 use App\Http\Controllers\Payment\PayOrderController;
 use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Postcard\PostcardController;
@@ -72,7 +73,11 @@ Route::get('/facades/postcards', [PostcardController::class,'index2'])->name('po
 // Facade Implementation End//
 
 
+// Macros Start//
 
+Route::get('/macros-exmaple', [MacrosExampleController::class,'index'])->name('mixin.index');
+
+// Macros End//
 
 
 
