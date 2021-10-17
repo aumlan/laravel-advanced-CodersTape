@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Channel\ChannelController;
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Macros\MacrosExampleController;
 use App\Http\Controllers\Payment\PayOrderController;
 use App\Http\Controllers\Post\PostController;
@@ -87,4 +88,9 @@ Route::get('/posts-filter', [PostController::class,'filter'])->name('post.filter
 // Pipeline End//
 
 
+// Repositories Pattern Start//
 
+Route::get('/customers', [CustomerController::class,'index'])->name('customer.index');
+Route::get('/customers/{id}', [CustomerController::class,'showDetails'])->name('customer.showDetails');
+
+// Repositories Pattern End//
