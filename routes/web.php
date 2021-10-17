@@ -3,6 +3,7 @@
 use App\Http\Controllers\Channel\ChannelController;
 use App\Http\Controllers\Payment\PayOrderController;
 use App\Http\Controllers\Post\PostController;
+use App\Http\Controllers\Postcard\PostcardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Video\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +61,15 @@ Route::get('/creat-tags-onVideo', [VideoController::class,'create_tags'])->name(
 // Polymorphic Relationship (e.g. ) End//
 
 
+// Facade Implementation Start//
 
+//Normal version
+Route::get('/postcards', [PostcardController::class,'index'])->name('postcard.index');
+
+//Facade version
+Route::get('/facades/postcards', [PostcardController::class,'index2'])->name('postcard.index2');
+
+// Facade Implementation End//
 
 
 

@@ -6,6 +6,7 @@ use App\Billing\BankPaymentGateway;
 use App\Billing\CreditPaymentGateway;
 use App\Billing\PaymentGatewayContract;
 use App\Models\Channel;
+use App\Postcard\PostcardSendingService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,21 @@ class AppServiceProvider extends ServiceProvider
            return new BankPaymentGateway('usd');
 
         });
+
+        // Facades Implementation
+
+        //Normal version
+//        $this->app->singleton(PostcardSendingService::class,function ($app){
+//            return new PostcardSendingService('usa',4,6);
+//        });
+
+        //Facade version
+        // 'postcard' in abstract is an allias
+        $this->app->singleton('Postcard',function ($app){
+            return new PostcardSendingService('usa',4,6);
+        });
+
+
     }
 
     /**
