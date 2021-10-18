@@ -94,3 +94,11 @@ Route::get('/customers', [CustomerController::class,'index'])->name('customer.in
 Route::get('/customers/{id}', [CustomerController::class,'showDetails'])->name('customer.showDetails');
 
 // Repositories Pattern End//
+
+
+// Soft Delete Start//
+
+Route::get('/customers/delete/{id}', [CustomerController::class,'softDelete'])->name('customer.delete');
+Route::get('/customers/restore/{id}', [CustomerController::class,'softDeleteRestore'])->name('customer.restore');
+
+// Soft Delete End//

@@ -36,4 +36,23 @@ class CustomerController extends Controller
         dd($customer);
     }
 
+
+    /**
+     * Soft Delete
+     */
+    public function softDelete($customerID)
+    {
+        Customer::where('id',$customerID)->delete();
+        $customers= Customer::all();
+        dd($customers);
+    }
+
+    public function softDeleteRestore($customerID)
+    {
+        Customer::withTrashed()
+            ->where('id',$customerID)
+            ->restore();
+        $customers= Customer::all();
+        dd($customers);
+    }
 }
