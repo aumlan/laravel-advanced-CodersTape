@@ -102,3 +102,10 @@ Route::get('/customers/delete/{id}', [CustomerController::class,'softDelete'])->
 Route::get('/customers/restore/{id}', [CustomerController::class,'softDeleteRestore'])->name('customer.restore');
 
 // Soft Delete End//
+
+
+// Notification Start//
+
+Route::get('/user/invoicePaidNotification/{id}', [UserController::class,'invoicePaidNotification'])->name('user.invoicePaidNotification');
+
+// Notification End//
